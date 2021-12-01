@@ -1,4 +1,4 @@
-"https://www.youtube.com/watch?v=_VuGmykVgTg stopped at 1:05:33"
+"https://www.youtube.com/watch?v=_VuGmykVgTg stopped at 1:52:07"
 import tw from "tailwind-styled-components"
 import mapboxgl from "mapbox-gl";
 import { useEffect } from 'react';
