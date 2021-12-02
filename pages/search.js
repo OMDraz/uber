@@ -52,7 +52,7 @@ const ButtonContainer = tw.div`
 `
 
 const BackButton = tw.img`
-    active:bg-green-700
+    cursor-pointer
 `
 
 const Inputcontainer = tw.div`

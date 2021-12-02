@@ -1,8 +1,7 @@
-"https://www.youtube.com/watch?v=_VuGmykVgTg stopped at 1:52:07"
 import tw from "tailwind-styled-components"
 import mapboxgl from "mapbox-gl";
 import { useEffect } from 'react';
-import Map from './components/map'
+import Map from './components/Map'
 import Link from 'next/link';
 
 
@@ -81,7 +80,7 @@ const ActionButtons = tw.div`
 `
 
 const ActionButton = tw.div`
-  flex bg-gray-200 flex-1 m-1 h-32 items-center flex-col justify-center rounded-lg transform hover:scale-105 transition text-xl
+  flex bg-gray-200 flex-1 m-1 h-32 items-center flex-col justify-center rounded-lg transform hover:scale-105 transition text-xl cursor-pointer
 `
 
 const ActionButtonImage = tw.img`
