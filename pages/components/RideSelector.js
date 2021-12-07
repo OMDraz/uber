@@ -1,16 +1,16 @@
+// https://www.youtube.com/watch?v=1NugihCoLdQ 
 import React, { useEffect, useState } from 'react'
 import tw from 'tailwind-styled-components'
 import { carList } from '../data/carList'
 
 const RideSelector = ({pickupCoordinates, dropoffCoordinates}) => {
-    const [ rideDuration, setRideDuration ] = useState()
+    const [ rideDuration, setRideDuration ] = useState(0)
 
     useEffect(() => {
-        fetch(`https://api.mapbox.com/directions/v5/driving/${pickupCoordinates[0]},${pickupCoordinates[1]};${dropoffCoordinates[0]},${dropoffCoordinates[1]}?access_token=pk.eyJ1Ijoib21hcmRyYXoiLCJhIjoiY2t3amxtc3lwMHFhNTJ1cXZtcjhkNmhpMCJ9.yw1LL0RskRr7J8NnzCQicw`)            
+        rideDuration = fetch(`https://api.mapbox.com/directions/v5/mapbox/driving/${pickupCoordinates[0]},${pickupCoordinates[1]};${dropoffCoordinates[0]},${dropoffCoordinates[1]}?access_token=pk.eyJ1Ijoib21hcmRyYXoiLCJhIjoiY2t3amxtc3lwMHFhNTJ1cXZtcjhkNmhpMCJ9.yw1LL0RskRr7J8NnzCQicw`)            
             .then(res => res.json())
             .then(data => {
-                console.log(pickupCoordinates)
-                console.log(dropoffCoordinates)
+                console.log(data)
                 setRideDuration(data.routes[0].duration / 100)
         })
     }, [pickupCoordinates, dropoffCoordinates])
@@ -27,7 +27,7 @@ const RideSelector = ({pickupCoordinates, dropoffCoordinates}) => {
                                 <Time> {car.multiplier * 5}min away</Time>
                             </CarDetails>
                         <CarPrice>
-                            <Price>${(rideDuration*car.multiplier).toFixed(2)}.00</Price>
+                            <Price>{'$' + (rideDuration*car.multiplier).toFixed(2)}</Price>
                         </CarPrice> 
                     </Car>
                 )) }

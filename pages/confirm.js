@@ -1,9 +1,9 @@
-'// https://www.youtube.com/watch?v=dLHk4g55SJQ stopped at 40:53'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import tw from "tailwind-styled-components"
 import Map from './components/Map'
 import RideSelector from './components/RideSelector'
+import Link from 'next/link'
 
 const confirm = () => {
 
@@ -47,6 +47,11 @@ const confirm = () => {
 
     return (
         <Wrapper>
+            <ButtonContainer>
+                <Link href='/search/'>
+                    <BackButton src='https://img.icons8.com/ios-filled/50/000000/left.png'/>
+                </Link>
+            </ButtonContainer>
             <Map
                 pickupCoordinates={pickupCoordinates}
                 dropoffCoordinates={dropoffCoordinates}
@@ -82,4 +87,11 @@ const ConfirmButtonContainer = tw.div`
 
 const ConfirmButton = tw.div`
     bg-black text-white my-4 mx-4 py-4 text-center text-xl
+`
+
+const ButtonContainer = tw.div`
+`
+
+const BackButton = tw.img`
+    h-full object-container
 `
