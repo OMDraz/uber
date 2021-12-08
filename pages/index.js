@@ -1,11 +1,32 @@
 import tw from "tailwind-styled-components"
 import mapboxgl from "mapbox-gl";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Map from './components/Map'
 import Link from 'next/link';
+import { auth } from '../firebase'
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useRouter } from 'next/router'
 
 
 export default function Home() {
+  const [user, setUser] = useState(null)
+  const router = useRouter()
+
+  useEffect(() => {
+    return onAuthStateChanged(auth, user => {
+      if (user) {
+        setUser({
+          name: user.displayName,
+          photoUrl: user.photoUrl
+        })
+      } else {
+        setUser(null)
+        router.push('/login')
+      }
+    })
+  }, [])
+
+
   return (
     <Wrapper>
       <Map/>
@@ -14,9 +35,9 @@ export default function Home() {
         <Header>
           <UberLogo src='https://i.ibb.co/84stgjq/uber-technologies-new-20218114.jpg'/>
           <Profile>
-            <Name>Omar Draz</Name>
+            <Name>{user && user.name}</Name>
             <UserImage 
-              src='https://i.picsum.photos/id/94/200/200.jpg?hmac=6A2OfXxXR04lSduBcURN4k0_3aiDGcJQjMpSwDmQevg'
+              src={user && user.photoUrl} onClick={() => signOut(auth)}
             />
           </Profile>
         </Header>
@@ -72,7 +93,7 @@ const Name = tw.div`
 `
 
 const UserImage = tw.img`
-  h-12 w-12 rounded-full border border-gray-400 p-px
+  h-12 w-12 rounded-full border border-gray-400 p-px cursor-pointer
 `
 
 const ActionButtons = tw.div`
